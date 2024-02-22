@@ -1,0 +1,25 @@
+{
+    "openapi": "3.1.0",
+    "info":{
+        "title": "Netflix API formatif",
+        "summary": "API Netflix",
+        "description": "API Netflix pour le formatif",
+        "contact": {
+            "name": "Alexandre del Fabbro",
+            "url": "https://www.grandmaitredel.com",
+            "email": "2166311@cegepvicto.ca"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "Local server"
+        }
+    ],
+    "paths": {
+        "/api/titres": {
+            
+        }
+    }
+}
