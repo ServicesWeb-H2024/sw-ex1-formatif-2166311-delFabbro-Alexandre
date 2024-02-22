@@ -1,6 +1,6 @@
 {
     "openapi": "3.1.0",
-    "info":{
+    "info": {
         "title": "Netflix API formatif",
         "summary": "API Netflix",
         "description": "API Netflix pour le formatif",
@@ -18,8 +18,98 @@
         }
     ],
     "paths": {
-        "/api/titres": {
-            
+        "/api/titres/{type_titre}": {
+            "get": {
+                "summary": "Liste des titres",
+                "description": "Retourne la liste des titres d'un type spécifique",
+                "tags": [
+                    "Titres"
+                ],
+                "parameters": [
+                    {
+                        "name": "type_titre",
+                        "in": "path",
+                        "required": true,
+                        "description": "Le type de titre à retourner",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "film",
+                                "films",
+                                "movie",
+                                "movies",
+                                "serie",
+                                "series",
+                                "tv_show",
+                                "tv_shows"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "La page à retourner",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retourne la liste des titres d'un type spécifique",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Titre"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Type de titre non trouvé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Erreur"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erreur serveur"
+                    }
+                },
+                "components": {
+                    "schemas": {
+                        "Titre": {
+                            "type": "object",
+                            "required": [
+                                "id",
+                                "titre"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "description": "L'identifiant du titre"
+                                },
+                                "titre": {
+                                    "type": "string",
+                                    "description": "Le titre du film ou de la série"
+                                }
+                            },
+                            "example": {
+                                "id": 1,
+                                "titre": "The Shawshank Redemption"
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

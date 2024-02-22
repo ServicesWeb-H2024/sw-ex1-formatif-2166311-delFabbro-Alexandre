@@ -8,6 +8,9 @@ const e = require("express");
 const Titre = require("../models/titres.model.js");
 const { parse } = require("path");
 
+const Films = ["film", "films", "movie", "movies"];
+const Series = ["serie", "series", "tv_show", "tv_shows"];
+
 /** 
  * Fonction pour trouver les titres selon le type
  * 
@@ -24,10 +27,10 @@ exports.getTitres = (req, res) => {
 
     let type_titre = req.params.type_titre;
 
-    if(req.params.type_titre == "film" || req.params.type_titre == "movie") {
+    if(Films.includes(req.params.type_titre)) {
         type_titre = "Movie";
     }
-    else if(req.params.type_titre == "serie" || req.params.type_titre == "tv_show") {
+    else if(Series.includes(req.params.type_titre)) {
         type_titre = "TV Show";
     }
     else {
